@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package sample;
+
+import "google/api/annotations.proto";
+
+service SampleRPC {
+  rpc Save(SaveReq) returns (SaveRes) {
+    option (google.api.http) = {
+      post: "/save/{id}"
+      body: "*"
+    };
+  }
+
+  rpc Get(GetReq) returns (GetRes) {
+    option (google.api.http) = {
+      get: "/get/{id}"
+    };
+  }
+}
+
+message SaveReq {
+  uint32 id = 1;
+  string message = 2;
+}
+
+message SaveRes {
+  bool success = 1;
+  uint32 id = 2;
+  string message = 3;
+}
+
+message GetReq {
+  uint32 id = 1;
+}
+
+message GetRes {
+  uint32 id = 1;
+  string message = 2;
+}
